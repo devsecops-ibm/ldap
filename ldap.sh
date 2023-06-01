@@ -36,7 +36,7 @@ ldapsearch -x -D "cn=admin,dc=ibm,dc=lab" -w P@ssw0rd -H ldap://localhost:389 -b
 
 
 #To authenticate us jayden.aung
-ldapsearch -x -D "cn=jayden.aung,ou=users,dc=ibm,dc=lab" -w P@ssw0rd -H ldap://localhost:389 -b "dc=ibm,dc=lab" -s base "(objectClass=*)"
+ldapsearch -x -D "cn=jayden.aung,ou=users,dc=ibm,dc=lab" -w P@ssw0rd -H ldap://localhost:389 -b "cn=jayden.aung,ou=users,dc=ibm,dc=lab" -s base "(objectClass=*)"
 
 ldapsearch -x -D "cn=jon.doe,ou=users,dc=ibm,dc=lab" -w password -H ldap://localhost:389 -b "cn=jon.doe,ou=users,dc=ibm,dc=lab" -s base "(objectClass=*)"
 
@@ -60,3 +60,4 @@ ldapmodify -x -D "cn=admin,dc=ibm,dc=lab" -W -H ldap://localhost:389 -f reset-pa
 
 # Check LDAP directory structure 
 ldapsearch -x -D "cn=admin,dc=ibm,dc=lab" -w P@ssw0rd -H ldap://localhost:389 -b "dc=ibm,dc=lab" -s base "(objectClass=*)"
+
