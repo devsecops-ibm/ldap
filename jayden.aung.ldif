@@ -1,0 +1,11 @@
+dn: cn=jayden.aung,ou=users,dc=ibm,dc=lab
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: jayden.aung
+sn: Aung
+givenName: Jayden
+uid: jayden.aung
+uidNumber: 10001
+gidNumber: 10000
+userPassword: {SSHA}9QK28tj/lajfpfvT6hxvnDo+UDogvQ6Y
+homeDirectory: /home/jayden.aung

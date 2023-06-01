@@ -1,0 +1,11 @@
+dn: cn=jon.doe,ou=users,dc=ibm,dc=lab
+objectClass: inetOrgPerson
+objectClass: posixAccount
+cn: jon.doe
+sn: Doe
+givenName: Jon
+uid: jon.doe
+uidNumber: 10002
+gidNumber: 10001
+userPassword: {CLEARTEXT}password
+homeDirectory: /home/jon.doe
