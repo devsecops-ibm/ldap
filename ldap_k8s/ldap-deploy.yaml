@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ldap
+  template:
+    metadata:
+      labels:
+        app: ldap
+    spec:
+      containers:
+        - name: ldap
+          image: osixia/openldap
+          env:
+            - name: LDAP_ORGANISATION
+              value: "IBM Demo"
+            - name: LDAP_DOMAIN
+              value: "ibm.lab"
+            - name: LDAP_ADMIN_PASSWORD
+              value: "P@ssw0rd"
+          ports:
+            - containerPort: 389
+          volumeMounts:
+            - name: ldap-data
+              mountPath: /var/lib/ldap
+      volumes:
+        - name: ldap-data
+          persistentVolumeClaim:
+            claimName: ldap-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ldap-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

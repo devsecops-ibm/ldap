@@ -10,6 +10,32 @@ docker run --name my-ldap -p 389:389 -e LDAP_ORGANISATION="IBM Demo" -e LDAP_DOM
 #Verify the LDAP deployment: After running the container, you can verify if the LDAP server is running correctly by using an LDAP client, such as ldapsearch. You may need to install an LDAP client on your macOS system if you don't have one already. 
 ldapsearch -x -H ldap://localhost:389 -b "dc=ibm,dc=lab" -D "cn=admin,dc=ibm,dc=lab" -w P@ssw0rd
 
+###########################################
+### Persistent volumes & Docker Compose ###
+###########################################
+mkdir ~/ldap_data
+
+cat << EOF > docker-compose.yaml
+version: '3'
+services:
+  ldap:
+    image: osixia/openldap
+    container_name: my-ldap
+    ports:
+      - '389:389'
+    environment:
+      - LDAP_ORGANISATION=IBM Demo
+      - LDAP_DOMAIN=ibm.lab
+      - LDAP_ADMIN_PASSWORD=P@ssw0rd
+    volumes:
+      - ~/ldap_data:/var/lib/ldap
+EOF
+
+
+docker-compose up -d
+
+## Password hashing
+
 slappasswd -s P@ssw0rd
 
 # Create parent OU
